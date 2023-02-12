@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Edit "{{ post['title'] }}" {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        <label for="title">Title</label>
+        <!--
+            The "or" operator is used in the "value" attribute:
+                1 - If the route was called originally to provide the edit
+                    fields, the post title is shown;
+                2 - If the route was called by itself (meaning the submit
+                    button was pressed), the typed title is shown. This is
+                    useful to check whether invalid form data was posted and
+                    display it so the user can fix the error.
+
+            Note: the "request" variable is automatically avaliable in
+            templates.
+        -->
+        <input name="title" id="title"
+            value="{{ request.form['title'] or post['title'] }}" required>
+
+        <label for="body">Body</label>
+        <textarea name="body" id="body">
+            {{ request.form['body'] or post['body'] }}
+        </textarea>
+
+        <input type="submit" value="Save">
+    </form>
+
+    <hr>
+
+    <!--
+        Show a confirmation dialog and then posts to the "delete" view (which 
+        doesn't have a template)
+    -->
+    <form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
+        <input type="submit" class="danger" value="Delete" onclick="return confirm('Are you sure?');">
+    </form>
+{% endblock %}

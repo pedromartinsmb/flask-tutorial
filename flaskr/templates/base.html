@@ -1,0 +1,42 @@
+<!doctype html>
+<!--
+    The "title" block change the title displayed in the browser's tab and
+    window title
+-->
+<title>{% block title %}{% endblock %} - Flaskr</title>
+<!--
+    "url_for" is automatically available in templates. Also, Flask
+    automatically adds a "static" view that takes a path relative to the
+    "flaskr/static" directory and serves it.
+-->
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<nav>
+    <h1>Flaskr</h1>
+    <ul>
+        <!-- "g" is automatically available in templates -->
+        {% if g.user %}
+            <li><span>{{ g.user['username'] }}</span></li>
+            <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+        {% else %}
+            <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+            <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+        {% endif %}
+    </ul>
+</nav>
+<section class="content">
+    <header>
+        <!-- The "header" block change the title displayed on the page -->
+        {% block header %}{% endblock %}
+    </header>
+    <!-- Iterates through the flashed messages and displays them -->
+    {% for message in get_flashed_messages() %}
+        <div class="flash">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <!--
+        The "content" block is where the content of each page goes (e.g. the
+        login form or a blog post)
+    -->
+    {% block content %}{% endblock %}
+</section>

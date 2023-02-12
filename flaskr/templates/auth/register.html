@@ -1,0 +1,32 @@
+<!--
+    This tells Jinja that this template should replace the corresponding blocks
+    in the base template (i.e. the register.html "header" block will replace the
+    base.html "header" block and so on)
+-->
+{% extends 'base.html' %}
+
+<!--
+    A useful pattern is to place the "title" block inside the "header" block.
+    This sets the title block and then output the value of it into the header
+    block, so that both the window and page share the same title without
+    writing it twice (i.e. the "Register" word will be used as the title AND
+    the header in the base templates).
+-->
+{% block header %}
+    <h1>{% block title %} Register {% endblock %}</h1>
+{% endblock %}
+
+ 
+{% block content %}
+    <!--
+        The "submit" button generates a POST request to the same route
+        (auth.register) with the registration info in the payload
+    -->
+    <form method="post">
+        <label for="username">Username</label>
+        <input name="username" id="username">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+        <input type="submit" value="Register">
+    </form>
+{% endblock %}

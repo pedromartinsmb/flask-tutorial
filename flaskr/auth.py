@@ -13,6 +13,9 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
+
+    # When the route is activated from its own submit button, the information
+    # is registered
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -43,6 +46,8 @@ def register():
         flash(error)
 
     # "render_template" renders a template containing HTML
+    # The route execution only gets this far if the route was activated from
+    # the GET method
     return render_template('auth/register.html')
 
 @bp.route('/login', methods=('GET', 'POST'))
