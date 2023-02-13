@@ -73,3 +73,5 @@ def init_app(app):
     # the "cli.add_command" adds a new command that can be called with the
     # "flask" command
     app.cli.add_command(init_db_command)
+
+    # init_db_command()

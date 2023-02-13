@@ -1,0 +1,28 @@
+runtime: python
+env: flex
+# The entrypoint is a command that is run when the runtime starts the app
+# If the entrypoint is specified (as it is here), the "gunicorn" library must
+# be included in the "requirements.txt" file
+# (see https://cloud.google.com/appengine/docs/standard/python3/runtime)
+#
+# If the Flask code is using a application factory, a variable must be set with
+# an app instance in the __init__.py file.
+# For example, if the application factory is the function "create_app", the
+# following code must be added at the end of the __init__.py file:
+# 
+# app = create_app()
+#
+# entrypoint: gunicorn -b :$PORT flaskr:app
+entrypoint: waitress-serve --listen=*:8080 flaskr:app
+service: default
+env_variables:
+  FLASK_APP: flaskr
+  FLASK_ENV: development
+runtime_config:
+  python_version: 3
+
+# This sets the minimum and maximum number of instances to be used by GAE to
+# serve the app
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 2

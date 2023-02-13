@@ -8,11 +8,11 @@ from setuptools import find_packages, setup
 # For more info on the "MANIFEST.in", see
 # https://packaging.python.org/en/latest/guides/using-manifest-in/
 setup(
-    name='flasrk',
+    name='flaskr',
     version='1.0.0',
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        'flask',
+        'flask'
     ],
 )

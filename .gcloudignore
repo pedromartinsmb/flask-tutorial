@@ -1,0 +1,18 @@
+# .gcloudignore
+
+# Ignore sensitive information
+*.secret
+*.key
+
+# Ignore virtualenv directories
+.env
+venv
+
+# Ignore compiled Python files
+*.pyc
+*.pyo
+
+# Ignore documentation and build artifacts
+docs/
+build/
+dist/
